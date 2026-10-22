@@ -35,7 +35,7 @@ fun printField(field: Array<CharArray>, title: String, showShips: Boolean = true
 }
 fun printBothFields(player: Array<CharArray>, enemy: Array<CharArray>, showEnemyShips: Boolean = false) {
     if (player.size != enemy.size || player[0].size != enemy[0].size) {
-        println("Ошибка: Поля должны быть одного размера!")
+        println("Поля должны быть одного размера!")
         return
     }
     val size = player.size
@@ -63,14 +63,14 @@ fun printBothFields(player: Array<CharArray>, enemy: Array<CharArray>, showEnemy
 }
 fun printFields(fields: Array<Array<CharArray>>, titles: Array<String>, showShips: BooleanArray) {
     if (fields.size != titles.size || fields.size != showShips.size) {
-        println("Ошибка: Размеры массивов аргументов не совпадают!")
+        println("Размеры массивов не совпадают!")
         return
     }
     if (fields.isEmpty()) return
     val size = fields[0].size
     for (f in fields) {
         if (f.size != size || f[0].size != size) {
-            println("Ошибка: Поля имеют разный размер!")
+            println("Поля должны быть одного размера!")
             return
         }
     }
