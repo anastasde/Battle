@@ -1,6 +1,5 @@
 class Player(val name: String) {
-    private var _field: Array<Array<CellState>> =
-        Array(size = 10) { Array(10) { CellState.EMPTY} }
+    private var _field: Array<Array<CellState>> = Array(size = 10) { Array(10) { CellState.EMPTY} }
 
     fun field(): Array<Array<CellState>> = _field
 
@@ -11,6 +10,21 @@ class Player(val name: String) {
     get() = _shots
     val hits: Int
     get() = _hits
+    fun countShips(): Int {
+        var count = 0
+        for (r in 0..9) {
+            for (c in 0..9) {
+                if (_field[r][c] == CellState.SHIP) {
+                    val hasLeft = c > 0 && _field[r][c - 1] == CellState.SHIP
+                    val hasTop = r > 0 && _field[r - 1][c] == CellState.SHIP
+                    if (!hasLeft && !hasTop) {
+                        count++
+                    }
+                }
+            }
+        }
+        return count
+    }
 
     fun accuracy(): Double =
         if (_shots == 0) 0.0 else _hits * 100.0 / _shots
@@ -37,6 +51,7 @@ class Player(val name: String) {
             }
         }
     }
+
     fun status(): String {
         val acc = String.format("%.1f", accuracy())
         return "Игрок $name: выстрелов $shots, попаданий $hits, точность $acc%"
@@ -44,22 +59,6 @@ class Player(val name: String) {
 
     fun isInside(row: Int, col: Int): Boolean {
         return row in 0 .. 9 && col in 0 .. 9
-    }
-
-    fun countShips(): Int {
-        var count = 0
-        for (r in 0..9) {
-            for (c in 0..9) {
-                if (_field[r][c] == CellState.SHIP) {
-                    val hasLeft = c > 0 && _field[r][c - 1] == CellState.SHIP
-                    val hasTop = r > 0 && _field[r - 1][c] == CellState.SHIP
-                    if (!hasLeft && !hasTop) {
-                        count++
-                    }
-                }
-            }
-        }
-        return count
     }
 
     fun canPlaceShip(startRow: Int, startCol: Int, size: Int, horizontal: Boolean): Boolean {

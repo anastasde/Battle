@@ -6,10 +6,10 @@ enum class CellState {
 
     fun toChar(): Char {
         return when (this) {
-            CellState.EMPTY -> '.'
-            CellState.SHIP -> '#'
-            CellState.HIT -> 'X'
-            CellState.MISS -> 'O'
+            EMPTY -> '.'
+            SHIP -> '#'
+            HIT -> 'X'
+            MISS -> 'O'
         }
     }
 }
