@@ -1,12 +1,13 @@
 fun createEmptyField(size: Int = 10): Array<CharArray> {
     return Array(size) { CharArray(size) { '.' } }
 }
+
 fun printField(field: Array<CharArray>, title: String, showShips: Boolean = true, debug: Boolean = false) {
     println("===$title===")
     val size = field.size
     if (debug) {
         val horizontal = "+---".repeat(size) + "+"
-        println("    " + field.indices.joinToString("   ")) // Индексы столбцов
+        println("    " + field.indices.joinToString("   "))
         println("  $horizontal")
         for (r in field.indices) {
             print("$r | ")
@@ -33,6 +34,7 @@ fun printField(field: Array<CharArray>, title: String, showShips: Boolean = true
         }
     }
 }
+
 fun printBothFields(player: Array<CharArray>, enemy: Array<CharArray>, showEnemyShips: Boolean = false) {
     if (player.size != enemy.size || player[0].size != enemy[0].size) {
         println("Поля должны быть одного размера!")
@@ -61,6 +63,7 @@ fun printBothFields(player: Array<CharArray>, enemy: Array<CharArray>, showEnemy
         println()
     }
 }
+
 fun printFields(fields: Array<Array<CharArray>>, titles: Array<String>, showShips: BooleanArray) {
     if (fields.size != titles.size || fields.size != showShips.size) {
         println("Размеры массивов не совпадают!")
@@ -76,7 +79,6 @@ fun printFields(fields: Array<Array<CharArray>>, titles: Array<String>, showShip
     }
     for (i in fields.indices) {
         val titleText = "=== ${titles[i]} ==="
-        // Рассчитываем отступ, чтобы поля визуально не слипались
         print(titleText.padEnd(size * 2 + 6))
     }
     println()
@@ -111,20 +113,25 @@ fun main() {
     enemyField[7][7] = '#'
     enemyField[5][5] = 'X'
     enemyField[5][6] = 'O'
+
     println("Часть 1.")
     printField(playerField, "Ваше поле")
     printField(enemyField, "Поле противника", showShips = false)
+
     println("Часть 2.")
     val smallField = createEmptyField(8)
     printField(smallField, "Маленькое поле 8×8")
+
     println("Часть 3.")
     playerField[3][2] = '#'
     playerField[3][3] = '#'
     enemyField[5][7] = '#'
     enemyField[5][5] = 'X'
     printBothFields(playerField, enemyField)
+
     println("Часть 4.")
     printField(playerField, "Ваше поле (debug)", debug = true)
+
     println("Часть 5.")
     val thirdField = createEmptyField()
     thirdField[1][1] = '#'
