@@ -8,29 +8,24 @@ class Player {
     fun isAlive(): Boolean {
         return shipsLeft > 0
     }
-
     fun accuracy(): Double {
         if (shots == 0) return 0.0
         return hits * 100.0 / shots
     }
-
     fun status(): String {
         val formattedAccuracy = String.format("%.1f", accuracy())
         return "Игрок $name: палуб осталось $shipsLeft, выстрелов $shots, попаданий $hits, точность $formattedAccuracy%"
     }
-
     fun takeDamage(): Boolean {
         shipsLeft--
         return isAlive()
     }
-
     fun registerShot(hit: Boolean) {
         shots++
         if (hit) {
             hits++
         }
     }
-
     fun reset() {
         shots = 0
         hits = 0
@@ -41,7 +36,6 @@ class Player {
             }
         }
     }
-
     fun printField() {
         println("=== Поле игрока $name ===")
         print(" ")
@@ -53,5 +47,4 @@ class Player {
             println()
         }
     }
-
 }
